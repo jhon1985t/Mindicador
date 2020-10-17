@@ -3,7 +3,6 @@ package com.jhonjto.mindicador.ui.main
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -20,7 +19,7 @@ import org.koin.androidx.viewmodel.scope.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter by androidLazy { IndicadoresAdapter(viewModel::onIndicadorClicked) }
+    private val adapter by androidLazy { IndicadoresAdapter(viewModel::onBitcoinClicked,viewModel::onDolarClicked,viewModel::onDolarIntercambioClicked,viewModel::onEuroClicked,viewModel::onImacecClicked,viewModel::onIpcClicked,viewModel::onIvpClicked,viewModel::onLibraCobreClicked,viewModel::onTasaDesempleoClicked,viewModel::onTpmClicked,viewModel::onUfClicked,viewModel::onUtmClicked) }
     private val consultaAdapter by androidLazy { ConsultaIndicadorAdapter(viewModel::onConsultaClicked) }
 
     private val viewModel: MainViewModel by lifecycleScope.viewModel(this)
@@ -206,11 +205,41 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-            is UiModel.Navigation -> {
-                Toast.makeText(this, model.bitcoin.nombre, Toast.LENGTH_SHORT).show()
+            is UiModel.NavigationBitcoin -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.bitcoin.codigo)
             }
-            is UiModel.Navigation -> startActivity<DetailActivity> {
-                //putExtra(DetailActivity.MOVIE, model.movie.id)
+            is UiModel.NavigationDolar -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.dolar.codigo)
+            }
+            is UiModel.NavigationDolarIntercambio -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.dolarIntercambio.codigo)
+            }
+            is UiModel.NavigationEuro -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.euro.codigo)
+            }
+            is UiModel.NavigationImacec -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.imacec.codigo)
+            }
+            is UiModel.NavigationIpc -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.ipc.codigo)
+            }
+            is UiModel.NavigationIvp -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.ivp.codigo)
+            }
+            is UiModel.NavigationLibraCobre -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.libraCobre.codigo)
+            }
+            is UiModel.NavigationTasaDesempleo -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.tasaDesempleo.codigo)
+            }
+            is UiModel.NavigationTpm -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.tpm.codigo)
+            }
+            is UiModel.NavigationUf -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.uf.codigo)
+            }
+            is UiModel.NavigationUtm -> startActivity<DetailActivity> {
+                putExtra(DetailActivity.INDICADOR, model.utm.codigo)
             }
         }
     }

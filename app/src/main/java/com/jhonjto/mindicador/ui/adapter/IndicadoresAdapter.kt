@@ -12,7 +12,18 @@ import java.util.ArrayList
  * Created by jhon on 15/10/2020
  */
 class IndicadoresAdapter(
-    listener: (Bitcoin) -> Unit
+    listenerBitcoin: (Bitcoin) -> Unit,
+    listenerDolar: (Dolar) -> Unit,
+    listenerDolarIntercambio: (DolarIntercambio) -> Unit,
+    listenerEuro: (Euro) -> Unit,
+    listenerImacec: (Imacec) -> Unit,
+    listenerIpc: (Ipc) -> Unit,
+    listenerIvp: (Ivp) -> Unit,
+    listenerLibraCobre: (LibraCobre) -> Unit,
+    listenerTasaDesempleo: (TasaDesempleo) -> Unit,
+    listenerTpm: (Tpm) -> Unit,
+    listenerUf: (Uf) -> Unit,
+    listenerUtm: (Utm) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var items: ArrayList<ViewType>
@@ -23,18 +34,18 @@ class IndicadoresAdapter(
     }
 
     init {
-        delegateAdapters.put(AdapterConstants.BITCOIN, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.DOLAR, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.DOLAR_INTERCAMBIO, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.EURO, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.IMACEC, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.IPC, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.IVP, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.LIBRA_COBRE, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.TASA_DESEMPLEO, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.TPM, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.UF, GenericDelegateAdapter(listener))
-        delegateAdapters.put(AdapterConstants.UTM, GenericDelegateAdapter(listener))
+        delegateAdapters.put(AdapterConstants.BITCOIN, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.DOLAR, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.DOLAR_INTERCAMBIO, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.EURO, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.IMACEC, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.IPC, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.IVP, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.LIBRA_COBRE, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.TASA_DESEMPLEO, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.TPM, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.UF, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
+        delegateAdapters.put(AdapterConstants.UTM, GenericDelegateAdapter(listenerBitcoin, listenerDolar, listenerDolarIntercambio, listenerEuro, listenerImacec, listenerIpc, listenerIvp, listenerLibraCobre, listenerTasaDesempleo, listenerTpm, listenerUf, listenerUtm))
         delegateAdapters.put(AdapterConstants.LOADING, LoadingDelegateAdapter())
         items = ArrayList()
         items.add(loadingItem)

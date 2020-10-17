@@ -19,10 +19,24 @@ class MindicadorDataSource (private val mindicadorAPI: MindicadorAPI) : RemoteDa
             .listPopularIndicadores()
             .toDomainPosts()
 
-    override suspend fun postConsultaIndicador(tipoIndicador: String): Resource<DomainConsultadoIndicador> {
+    override suspend fun getConsultaIndicador(tipoIndicador: String): Resource<DomainConsultadoIndicador> {
         return try {
             val consult = mindicadorAPI.service
                 .filterTipoIndicador(tipoIndicador)
+                .toDomainPosts()
+            ResponseHandler().handleSuccess(consult)
+        } catch (e: Exception) {
+            ResponseHandler().handleException(e)
+        }
+    }
+
+    override suspend fun getConsultaIndicadorMes(
+        tipoIndicador: String,
+        ultimoMes: String
+    ): Resource<DomainConsultadoIndicador> {
+        return try {
+            val consult = mindicadorAPI.service
+                .detailTipoIndicador(tipoIndicador, ultimoMes)
                 .toDomainPosts()
             ResponseHandler().handleSuccess(consult)
         } catch (e: Exception) {

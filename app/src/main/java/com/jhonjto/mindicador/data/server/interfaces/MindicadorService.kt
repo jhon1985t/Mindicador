@@ -17,4 +17,10 @@ interface MindicadorService {
     suspend fun filterTipoIndicador(
         @Path("tipo_indicador") tipoIndicador: String
     ) : ServerResponseConsultaIndicador
+
+    @GET("/api/{tipo_indicador}/{dd-mm-yyyy}")
+    suspend fun detailTipoIndicador(
+        @Path("tipo_indicador") tipoIndicador: String,
+        @Path("dd-mm-yyyy") ultimoMes: String
+    ) : ServerResponseConsultaIndicador
 }

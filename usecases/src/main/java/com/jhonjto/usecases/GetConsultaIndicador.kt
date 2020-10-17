@@ -7,7 +7,7 @@ import com.movies.data.common.Resource
 /**
  * Created by jhon on 16/10/2020
  */
-class PostConsultaIndicador(private val consultaIndicadorRepository: ConsultaIndicadorRepository) {
+class GetConsultaIndicador(private val consultaIndicadorRepository: ConsultaIndicadorRepository) {
     suspend fun invoke(tipoIndicador: String): Resource<DomainConsultadoIndicador> =
-        consultaIndicadorRepository.postConsultaIndicadores(tipoIndicador)
+        consultaIndicadorRepository.getConsultaIndicadores(tipoIndicador)
 }

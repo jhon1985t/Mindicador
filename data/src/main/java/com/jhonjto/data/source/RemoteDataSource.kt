@@ -11,5 +11,7 @@ interface RemoteDataSource {
 
     suspend fun getIndicadoresList() : DomainIndicadores
 
-    suspend fun postConsultaIndicador(tipoIndicador: String) : Resource<DomainConsultadoIndicador>
+    suspend fun getConsultaIndicador(tipoIndicador: String) : Resource<DomainConsultadoIndicador>
+
+    suspend fun getConsultaIndicadorMes(tipoIndicador: String, ultimoMes: String) : Resource<DomainConsultadoIndicador>
 }

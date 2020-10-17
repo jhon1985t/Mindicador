@@ -11,7 +11,7 @@ class ConsultaIndicadorRepository(
     private val remoteDataSource: RemoteDataSource
 ) {
 
-    suspend fun postConsultaIndicadores(tipoIndicador: String): Resource<DomainConsultadoIndicador> {
-        return remoteDataSource.postConsultaIndicador(tipoIndicador)
+    suspend fun getConsultaIndicadores(tipoIndicador: String): Resource<DomainConsultadoIndicador> {
+        return remoteDataSource.getConsultaIndicador(tipoIndicador)
     }
 }
