@@ -14,4 +14,5 @@ object AdapterConstants {
     val TPM = 10
     val UF = 11
     val UTM = 12
+    val DOMAIN_INDICADORES = 13
 }

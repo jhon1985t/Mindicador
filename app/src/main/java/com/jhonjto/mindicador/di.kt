@@ -1,6 +1,7 @@
 package com.jhonjto.mindicador
 
 import android.app.Application
+import com.jhonjto.data.repository.ConsultaIndicadorRepository
 import com.jhonjto.data.repository.IndicadoresListRepository
 import com.jhonjto.data.source.RemoteDataSource
 import com.jhonjto.mindicador.data.server.MindicadorAPI
@@ -8,6 +9,7 @@ import com.jhonjto.mindicador.data.server.datasources.MindicadorDataSource
 import com.jhonjto.mindicador.ui.MainActivity
 import com.jhonjto.mindicador.ui.MainViewModel
 import com.jhonjto.usecases.GetIndicadoresList
+import com.jhonjto.usecases.PostConsultaIndicador
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
@@ -38,11 +40,13 @@ private val appModule = module {
 
 val dataModule = module {
     factory { IndicadoresListRepository(get()) }
+    factory { ConsultaIndicadorRepository(get()) }
 }
 
 private val scopesModule = module {
     scope(named<MainActivity>()) {
-        viewModel { MainViewModel(get(), get()) }
+        viewModel { MainViewModel(get(), get(), get()) }
         scoped { GetIndicadoresList(get()) }
+        scoped { PostConsultaIndicador(get()) }
     }
 }

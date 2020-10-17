@@ -2,9 +2,12 @@ package com.jhonjto.mindicador.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.jhonjto.domain.consultado.DomainConsultadoIndicador
 import com.jhonjto.domain.indicadores.DomainIndicadores
-import com.jhonjto.mindicador.ui.common.ScopedViewModel
+import com.jhonjto.mindicador.ui.common.*
 import com.jhonjto.usecases.GetIndicadoresList
+import com.jhonjto.usecases.PostConsultaIndicador
+import com.movies.data.common.Status
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
@@ -13,6 +16,7 @@ import kotlinx.coroutines.launch
  */
 class MainViewModel(
     private val getIndicadoresList: GetIndicadoresList,
+    private val postConsultaIndicador: PostConsultaIndicador,
     uiDispatcher: CoroutineDispatcher
 ) : ScopedViewModel(uiDispatcher) {
 
@@ -25,10 +29,17 @@ class MainViewModel(
             return _model
         }
 
+    private val _consult = MutableLiveData<DomainConsultadoIndicador>()
+    val consult: LiveData<DomainConsultadoIndicador> = _consult
+
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
+
     sealed class UiModel {
         object Loading : UiModel()
         data class Content(val domainIndicadores: DomainIndicadores) : UiModel()
-        data class Navigation(val domainIndicadores: DomainIndicadores) : UiModel()
+        data class Navigation(val bitcoin: Bitcoin) : UiModel()
+        data class Consulta(val domainConsultadoIndicador: DomainConsultadoIndicador) : UiModel()
     }
 
     init {
@@ -42,8 +53,27 @@ class MainViewModel(
         }
     }
 
-    fun onIndicadorClicked(domainIndicadores: DomainIndicadores) {
-        _model.value = UiModel.Navigation(domainIndicadores)
+    fun onConsultaRequested(tipoIndicador: String) {
+        launch {
+            val result = postConsultaIndicador.invoke(tipoIndicador)
+            when(result.status){
+                Status.SUCCESS -> {
+                    _consult.value = result.data
+                }
+                Status.ERROR -> {
+                    _message.value = result.message
+                }
+                else -> {}
+            }
+        }
+    }
+
+    fun onIndicadorClicked(bitcoin: Bitcoin) {
+        _model.value = UiModel.Navigation(bitcoin)
+    }
+
+    fun onConsultaClicked(domainConsultadoIndicador: DomainConsultadoIndicador) {
+        _model.value = UiModel.Consulta(domainConsultadoIndicador)
     }
 
     override fun onCleared() {
