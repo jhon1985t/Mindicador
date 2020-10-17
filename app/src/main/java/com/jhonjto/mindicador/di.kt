@@ -6,13 +6,12 @@ import com.jhonjto.data.repository.IndicadoresListRepository
 import com.jhonjto.data.source.RemoteDataSource
 import com.jhonjto.mindicador.data.server.MindicadorAPI
 import com.jhonjto.mindicador.data.server.datasources.MindicadorDataSource
-import com.jhonjto.mindicador.ui.MainActivity
-import com.jhonjto.mindicador.ui.MainViewModel
+import com.jhonjto.mindicador.ui.main.MainActivity
+import com.jhonjto.mindicador.ui.main.MainViewModel
 import com.jhonjto.usecases.GetIndicadoresList
 import com.jhonjto.usecases.PostConsultaIndicador
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel

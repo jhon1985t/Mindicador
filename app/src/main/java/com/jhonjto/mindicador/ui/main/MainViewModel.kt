@@ -1,4 +1,4 @@
-package com.jhonjto.mindicador.ui
+package com.jhonjto.mindicador.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +29,9 @@ class MainViewModel(
             return _model
         }
 
+    private val _filter = MutableLiveData<DomainIndicadores>()
+    val filter: LiveData<DomainIndicadores> = _filter
+
     private val _consult = MutableLiveData<DomainConsultadoIndicador>()
     val consult: LiveData<DomainConsultadoIndicador> = _consult
 
@@ -50,6 +53,12 @@ class MainViewModel(
         launch {
             _model.value = UiModel.Loading
             _model.value = UiModel.Content(getIndicadoresList.invoke())
+        }
+    }
+
+    fun onFilterRequested() {
+        launch {
+            _filter.value = getIndicadoresList.invoke()
         }
     }
 

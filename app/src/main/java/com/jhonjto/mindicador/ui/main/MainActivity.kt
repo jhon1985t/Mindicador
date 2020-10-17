@@ -1,8 +1,7 @@
-package com.jhonjto.mindicador.ui
+package com.jhonjto.mindicador.ui.main
 
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +9,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jhonjto.mindicador.R
-import com.jhonjto.mindicador.ui.MainViewModel.UiModel
+import com.jhonjto.mindicador.ui.main.MainViewModel.UiModel
 import com.jhonjto.mindicador.ui.adapter.IndicadoresAdapter
 import com.jhonjto.mindicador.ui.adapter.consultaIndicador.ConsultaIndicadorAdapter
 import com.jhonjto.mindicador.ui.common.*
+import com.jhonjto.mindicador.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.scope.lifecycleScope
 import org.koin.androidx.viewmodel.scope.viewModel
@@ -209,9 +209,9 @@ class MainActivity : AppCompatActivity() {
             is UiModel.Navigation -> {
                 Toast.makeText(this, model.bitcoin.nombre, Toast.LENGTH_SHORT).show()
             }
-            /*is UiModel.Navigation -> startActivity<DetailActivity> {
-                putExtra(DetailActivity.MOVIE, model.movie.id)
-            }*/
+            is UiModel.Navigation -> startActivity<DetailActivity> {
+                //putExtra(DetailActivity.MOVIE, model.movie.id)
+            }
         }
     }
 }
